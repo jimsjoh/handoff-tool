@@ -13,7 +13,6 @@ Input_Project := "eCAT/XPT - Content|eCAT Tool/MRA|PP - BL-Credit|PP - BL-Global
 Input_TestCase := ""
 Input_To := "DL-PayPal-LQATesters@paypal.com"
 Input_CC := "DL-PP-LQA-LEADS@paypal.com"
-;Input_Locales := "ar_AE|ar_BH|ar_DZ|ar_EG|ar_JO|ar_KW|ar_MA|ar_OM|ar_QA|ar_SA|ar_TN|ar_YE|da_DK|de_AT|de_CH|de_DE|de_LU|en_AR|en_AT|en_AU|en_BE|en_BR|en_C2|en_CA|en_CH|en_CL|en_CR|en_CZ|en_DE|en_DK|en_DO|en_EC|en_ES|en_FI|en_FR|en_GB|en_GF|en_GP|en_GR|en_HK|en_HU|en_ID|en_IE|en_IL|en_IN|en_IS|en_IT|en_JM|en_JP|en_KR|en_LU|en_MC|en_MQ|en_MX|en_MY|en_NL|en_NO|en_NZ|en_PL|en_PT|en_RE|en_RU|en_SE|en_SG|en_TH|en_TR|en_TW|en_US|en_UY|en_VE|es_AR|es_CL|es_CR|es_CZ|es_DK|es_DO|es_EC|es_ES|es_FI|es_GF|es_GP|es_GR|es_HU|es_IE|es_JM|es_LU|es_MC|es_MQ|es_MX|es_NO|es_NZ|es_PT|es_RE|es_RU|es_SE|es_US|es_UY|es_VE|es_XC|fr_BE|fr_CA|fr_CH|fr_CL|fr_CR|fr_CZ|fr_DK|fr_DO|fr_EC|fr_FI|fr_FR|fr_GF|fr_GP|fr_GR|fr_HU|fr_IE|fr_JM|fr_LU|fr_MC|fr_MQ|fr_NO|fr_NZ|fr_PT|fr_RE|fr_RU|fr_SE|fr_US|fr_UY|fr_VE|fr_XC|he_IL|id_ID|it_IT|ja_JP|ko_KR|nl_BE|nl_NL|no_NO|pl_PL|pt_BR|pt_PT|py_en|py_es|ru_RU|sv_SE|th_TH|tr_TR|zh_C2|zh_CL|zh_CN|zh_CR|zh_CZ|zh_DK|zh_DO|zh_EC|zh_FI|zh_GF|zh_GP|zh_GR|zh_HK|zh_HU|zh_IE|zh_JM|zh_LU|zh_MC|zh_MQ|zh_NO|zh_NZ|zh_PT|zh_RE|zh_RU|zh_SE|zh_TW|zh_US|zh_UY|zh_VE|zh_XC"
 
 ;Win+Z key to trigger
 /*
@@ -24,9 +23,9 @@ Input_CC := "DL-PP-LQA-LEADS@paypal.com"
 
 CreateGUI:
 Gui Destroy
+
 ;Left column
-Gui Add, Text, x10 y10 w95 h25 +0x200 Right Section, Sender
-;Gui Add, Text, yp+50 w95 h25 +0x200 Right Section, Sender
+Gui Add, Text, x10 y10 w95 h25 +0x200 Right, Sender
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, To...
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, CC...
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Email subject
@@ -41,23 +40,21 @@ Gui Add, Text, yp+25 w95 h25 +0x200 Right, Affect version
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Component
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Labels
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Test case details
-;Gui Add, Text, yp+25 w95 h25 +0x200 Right, Test case URL
-;Gui Add, Text, yp+25 w95 h25 +0x200 Right, Locales
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, L10n assignee
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Non-L10n assignee
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Demo taker
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Time tracker
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Slack channel
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Slack URL
+Gui Add, Text, yp+25 w95 h25 +0x200 Right, Task notes
+
 ; Right column
 Gui Add, Edit, vInput_Sender ys x115 w450 h21, %Input_Sender%
 Gui Add, Edit, vInput_To yp+25 w450 h21, %Input_To%
 Gui Add, Edit, vInput_CC yp+25 w450 h21, %Input_CC%
 Gui Add, Edit, vInput_Subject yp+25 w450 h21, %Input_Subject%
 Gui Add, Edit, vInput_InternalDL yp+25 w450 h21, %Input_InternalDL%
-;Gui, Add, DateTime, yp+25 vInput_InternalDL w450 h21, dd/MM/yy HH:mm
 Gui Add, Edit, vInput_OfficialDL yp+25 w450 h21, %Input_OfficialDL%
-;Gui, Add, DateTime, yp+25 vInput_OfficialDL w450 h21, dd/MM/yy
 Gui Add, Edit, vInput_Automation yp+25 w450 h21, %Input_Automation%
 Gui Add, Edit, vInput_Manual yp+25 w450 h21, %Input_Manual%
 Gui Add, Edit, vInput_BuildID yp+25 w450 h21, %Input_BuildID%
@@ -67,16 +64,14 @@ Gui Add, Combobox, vInput_AffectVersion yp+25 w450, %Input_AffectVersion%
 Gui Add, Edit, vInput_Component yp+25 w450 h21, %Input_Component%
 Gui Add, Edit, vInput_Labels yp+25 w450 h21, %Input_Labels%
 Gui Add, Edit, vInput_TestCase yp+25 w450 h21, %Input_TestCase%
-;Gui Add, Edit, vInput_TestCaseURL yp+25 w450 h21, %Input_TestCaseURL%
-;Gui Add, Button, yp+25 w100 h25 gButtonLocales, Select
-;Gui Add, Edit, vInput_Locales yp+25 w450 h61 Multi, %Input_Locales%
-;Gui Add, Listbox, vInput_Locales yp+25 w450 h61 +Multi +Sort, %Input_Locales%
 Gui Add, Edit, vInput_L10n yp+25 w450 h21, %Input_L10n%
 Gui Add, Edit, vInput_NonL10n yp+25 w450 h21, %Input_NonL10n%
 Gui Add, Edit, vInput_DemoTaker yp+25 w450 h21, %Input_DemoTaker%
 Gui Add, Edit, vInput_TimeTracker yp+25 w450 h21, %Input_TimeTracker%
 Gui Add, Edit, vInput_SlackChan yp+25 w450 h21, %Input_SlackChan%
 Gui Add, Edit, vInput_SlackURL yp+25 w450 h21, %Input_SlackURL%
+Gui Add, Edit, vInput_Tasknotes yp+25 w450 h21, %Input_Tasknotes%
+
 ;Buttons
 Gui Add, Button, xm+5 w100 h25 gButtonCreate, Create
 Gui Add, Button, xp+110 w100 h25 gButtonCancel, Cancel
@@ -86,29 +81,6 @@ Gui Add, Button, xp+110 w100 h25 gButton_Reset, Reset
 Gui Show, AutoSize, Handoff tool
 Return
 
-/*
-;When pressing Select button (locales)
-ButtonLocales:
-Gui, 2:Add, Text, x10 y10 w200 h25 +0x200, Select locales (Ctrl for multiple)
-Gui, 2:Add, Listbox, vInput_LocalesSelected yp+25 w200 r20 +Multi +Sort, %Input_Locales%
-Gui, 2:Add, Button, yp+275 w100 h25 gButtonDoneLocales, Done
-Gui, 2:Add, Button, xp+110 w100 h25 gButtonCancelLocales, Cancel
-Gui, 2:Show, AutoSize, Handoff tool
-Return
-
-;When pressing Done in locales
-ButtonDoneLocales:
-	Gui, 2:Submit
-	GuiControlGet, Input_LocalesSelected
-	Msgbox, %Input_LocalesSelected%
-	return
-
-
-;When pressing Cancel in Locales menu
-ButtonCancelLocales:
-	Gui, 2:Destroy
-	return
-*/
 
 ;When pressing Create button
 ButtonCreate:
@@ -136,15 +108,7 @@ ButtonCreate:
 	GuiControlGet, Input_TimeTracker
 	GuiControlGet, Input_SlackChan
 	GuiControlGet, Input_SlackURL
-	;FormatTime, Input_InternalDL, %Input_InternalDL%, dd/MM/yy '–' HH:mm
-	;FormatTime, Input_OfficialDL, %Input_OfficialDL%, dd/MM/yy
-	;msgbox, %Input_InternalDL%
-;	Loop
-;	{
-;			Input_Labels := StrReplace(Input_Labels, ",", "`n", Count)
-;			if Count = 0  ; No more replacements needed.
-;					break
-;	}
+	GuicontrolGet, Input_Tasknotes
 	Gosub CreateMail
 	Return
 
@@ -198,6 +162,7 @@ Button_Load:
 	;Slack
 	IniRead, Input_SlackChan, %Template_Load%, Slack, 1
 	IniRead, Input_SlackURL, %Template_Load%, Slack, 2
+	IniRead, Input_Tasknotes, %Template_Load%, Tasknotes, 1
 	gosub CreateGUI
 	}
 	return
@@ -228,25 +193,28 @@ Button_Save:
 	GuiControlGet, Input_TimeTracker
 	GuiControlGet, Input_SlackChan
 	GuiControlGet, Input_SlackURL
+	GuiControlGet, Input_Tasknotes
 	FileSelectFile, Template_Save, S 16,, Save template
-	; Remove all blank lines from the text in a variable:
 
 	if Template_Save !=
 	{
 	Input_Project_Default := "eCAT/XPT - Content|eCAT Tool/MRA|PP - BL-Credit|PP - BL-Global Operations|PP - BL-Risk|PP - PL-Consumer|PP - PL-Merchant|PP - PL-Payments & Platform"
 	Input_AffectVersion_Default := "Unknown – Not Yet Live|Unknown – On Live|N/A"
-	;msgbox, %Template_Save%
+
 	;Email,
 	IniWrite, %Input_Sender%, %Template_Save%, Email, 1
 	IniWrite, %Input_To%, %Template_Save%, Email, 2
 	IniWrite, %Input_CC%, %Template_Save%, Email, 3
+
 	; Deadline
 	IniWrite, %Input_InternalDL%, %Template_Save%, Deadline, 1
 	IniWrite, %Input_OfficialDL%, %Template_Save%, Deadline, 2
+
 	;Stage details
 	IniWrite, %Input_Automation%, %Template_Save%, Stage, 1
 	IniWrite, %Input_Manual%, %Template_Save%, Stage, 2
 	IniWrite, %Input_BuildID%, %Template_Save%, Stage, 3
+
 	;Bug logging guidelines
 	IniWrite, %Input_Summary%, %Template_Save%, Bug logging guidelines, 1
 	IfInString, Input_AffectVersion_Default, %Input_AffectVersion%
@@ -262,37 +230,31 @@ Button_Save:
 	IniWrite, %Input_Labels%, %Template_Save%, Bug logging guidelines, 4
 	StringReplace, Input_Project2, Input_Project_Default, %Input_Project%, %Input_Project%|
 	IniWrite, %Input_Project2%, %Template_Save%, Bug logging guidelines, 5
+
 	;Test Cases
 	IniWrite, %Input_TestCase%, %Template_Save%, Test cases, 1
 	IniWrite, %Input_TestCaseURL%, %Template_Save%, Test cases, 2
-	;Locales
-	/*
-	msgbox, %Input_LocalesSelected%
-	msgbox, %Input_Locales%
-	StringSplit, Input_LocalesSelected, Input_LocalesSelected, |,
-	Loop, %Input_LocalesSelected%
-	{
-	Stringreplace, Input_Locales2, Input_Locales, %Input_LocalesSelected%, %Input_LocalesSelected%|
-	}
-	*/
-	IniWrite, %Input_Locales%, %Template_Save%, Locales, 1
+
 	;Assignee
 	IniWrite, %Input_L10n%, %Template_Save%, Assignee, 1
 	IniWrite, %Input_NonL10n%, %Template_Save%, Assignee, 2
+
 	;Demo
 	IniWrite, %Input_DemoTaker%, %Template_Save%, Demo, 1
+
 	;Time Tracker
 	IniWrite, %Input_TimeTracker%, %Template_Save%, Time Tracker, 1
-	;Time Tracker
-	IniWrite, %Input_TimeTracker%, %Template_Save%, Time Tracker, 1
-	;Time Tracker
+
+	;Slack
 	IniWrite, %Input_SlackChan%, %Template_Save%, Slack, 1
 	IniWrite, %Input_SlackURL%, %Template_Save%, Slack, 2
-	;msgbox, %Input_Locales2%
+
+	;Tasknotes
+	IniWrite, %Input_Tasknotes%, %Template_Save%, Tasknotes, 1
 	}
 	return
 
-
+;Creating email template
 CreateMail:
 ;Table DEADLINE %Email_Deadline%
 If Input_InternalDL !=
@@ -506,7 +468,8 @@ adhocbug</span>
 - Remember to update status of task and cases on daily dashboard/automation/testrail (if manual)
 <br>
 <br>
-<b>Task specific notes:</b>
+<b>Task specific notes:</b><br>
+%Input_Tasknotes%
 <br>
 <br>
 <br>
