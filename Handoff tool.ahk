@@ -9,7 +9,7 @@ SetBatchLines, -1 ;AHK run faster
 Input_L10n := "Assign to Linguist/LM (for approvals), then to dl-pp-triage-dt-g11n-l10n-production."
 Input_Labels := "AlphaCRC, LQA, "
 Input_AffectVersion := "Unknown – Not Yet Live|Unknown – On Live|N/A"
-Input_Project := "eCAT/XPT - Content|eCAT Tool/MRA|PP - BL-Credit|PP - BL-Global Operations|PP - BL-Risk|PP - PL-Consumer|PP - PL-Merchant|PP - PL-Payments & Platform"
+Input_Project := "eCAT Content/Production Issues|Localization (LOCALZN)|PP - BL-Credit|PP - BL-Global Operations|PP - BL-Risk|PP - PL-Consumer|PP - PL-Merchant|PP - PL-Payments & Platform"
 Input_TestCase := ""
 Input_To := "DL-PayPal-LQATesters@paypal.com"
 Input_CC := "DL-PP-LQA-LEADS@paypal.com"
@@ -198,7 +198,7 @@ Button_Save:
 
 	if Template_Save !=
 	{
-	Input_Project_Default := "eCAT/XPT - Content|eCAT Tool/MRA|PP - BL-Credit|PP - BL-Global Operations|PP - BL-Risk|PP - PL-Consumer|PP - PL-Merchant|PP - PL-Payments & Platform"
+	Input_Project_Default := "eCAT Content/Production Issues|Localization (LOCALZN)|PP - BL-Credit|PP - BL-Global Operations|PP - BL-Risk|PP - PL-Consumer|PP - PL-Merchant|PP - PL-Payments & Platform"
 	Input_AffectVersion_Default := "Unknown – Not Yet Live|Unknown – On Live|N/A"
 
 	;Email,
@@ -253,6 +253,7 @@ Button_Save:
 	IniWrite, %Input_Tasknotes%, %Template_Save%, Tasknotes, 1
 	}
 	return
+
 
 ;Creating email template
 CreateMail:
@@ -362,6 +363,17 @@ Else
 	{
 	Email_StageDetailsFull = %Email_StageDetailsEmpty%
 	}
+
+;Bug logging guidelines
+If (Input_Project = "eCAT Content/Production Issues" OR Input_Project = "Localization (LOCALZN)")
+	{
+		Input_Project = %Input_Project%
+	}
+else
+	{
+		Input_Project = L10N: Localization (LOCALZN)<br>Non-L10N: %Input_Project%
+	}
+
 
 
 ;Table TEST CASES %Email_TestCase%
