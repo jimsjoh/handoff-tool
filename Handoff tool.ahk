@@ -104,7 +104,6 @@ ButtonCreate:
 	GuiControlGet, Input_GPM
 	GuiControlGet, Input_TestCase
 	GuiControlGet, Input_TestCaseURL
-	GuiControlGet, Input_Locales
 	GuiControlGet, Input_L10n
 	GuiControlGet, Input_NonL10n
 	GuiControlGet, Input_DemoTaker
@@ -154,8 +153,6 @@ Button_Load:
 	;Test Cases
 	IniRead, Input_TestCase, %Template_Load%, Test cases, 1
 	IniRead, Input_TestCaseURL, %Template_Load%, Test cases, 2
-	;Locales
-	IniRead, Input_Locales, %Template_Load%, Locales, 1
 	;Assignee
 	IniRead, Input_L10n, %Template_Load%, Assignee, 1
 	IniRead, Input_NonL10n, %Template_Load%, Assignee, 2
@@ -549,7 +546,7 @@ adhocbug</span>
 <th style="width: 491.806px; border-color: #000000; background-color: %Cell_Header_BGcolor%; text-align: center; vertical-align: middle;" scope="colgroup"><span style="color: #ffffff;">LOCALES</span></th>
 </tr>
 <tr>
-<td style="background-color: #ffffff; width: 125.931px;" scope="row">%Input_Locales%<br>&nbsp;</td>
+<td style="background-color: #ffffff; width: 125.931px;" scope="row"><br>&nbsp;</td>
 </tr>
 </tbody>
 </table>
