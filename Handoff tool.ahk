@@ -40,6 +40,7 @@ Gui Add, Text, yp+25 w95 h25 +0x200 Right, Affect version
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Component
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Labels
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, GPM
+Gui Add, Text, yp+25 w95 h25 +0x200 Right, User story
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Test case details
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, L10n assignee
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Non-L10n assignee
@@ -65,6 +66,7 @@ Gui Add, Combobox, vInput_AffectVersion yp+25 w450, %Input_AffectVersion%
 Gui Add, Edit, vInput_Component yp+25 w450 h21, %Input_Component%
 Gui Add, Edit, vInput_Labels yp+25 w450 h21, %Input_Labels%
 Gui Add, Edit, vInput_GPM yp+25 w450 h21, %Input_GPM%
+Gui Add, Edit, vInput_US yp+25 w450 h21, %Input_US%
 Gui Add, Edit, vInput_TestCase yp+25 w450 h21, %Input_TestCase%
 Gui Add, Edit, vInput_L10n yp+25 w450 h21, %Input_L10n%
 Gui Add, Edit, vInput_NonL10n yp+25 w450 h21, %Input_NonL10n%
@@ -102,6 +104,7 @@ ButtonCreate:
 	GuiControlGet, Input_Component
 	GuiControlGet, Input_Labels
 	GuiControlGet, Input_GPM
+	GuiControlGet, Input_US
 	GuiControlGet, Input_TestCase
 	GuiControlGet, Input_TestCaseURL
 	GuiControlGet, Input_L10n
@@ -150,6 +153,7 @@ Button_Load:
 	IniRead, Input_Labels, %Template_Load%, Bug logging guidelines, 4
 	IniRead, Input_Project, %Template_Load%, Bug logging guidelines, 5
 	IniRead, Input_GPM, %Temaplte_Load%, GPM, 1
+	IniRead, Input_US, %Template_Load%, Userstory, 1
 	;Test Cases
 	IniRead, Input_TestCase, %Template_Load%, Test cases, 1
 	IniRead, Input_TestCaseURL, %Template_Load%, Test cases, 2
@@ -186,6 +190,7 @@ Button_Save:
 	GuiControlGet, Input_Component
 	GuiControlGet, Input_Labels
 	GuiControlGet, Input_GPM
+	GuiControlGet, Input_US
 	GuiControlGet, Input_TestCase
 	GuiControlGet, Input_TestCaseURL
 	GuiControlGet, Input_L10n
@@ -232,6 +237,7 @@ Button_Save:
 	StringReplace, Input_Project2, Input_Project_Default, %Input_Project%, %Input_Project%|
 	IniWrite, %Input_Project2%, %Template_Save%, Bug logging guidelines, 5
 	IniWrite, %Input_GPM%, %Template_Save%, GPM, 1
+	IniWrite, %Input_US%, %Template_Save%, US, 1
 
 	;Test Cases
 	IniWrite, %Input_TestCase%, %Template_Save%, Test cases, 1
@@ -525,6 +531,10 @@ adhocbug</span>
 <tr>
 <td style="background-color: #ffffff; width: 125.931px;" scope="row">GPM</td>
 <td style="background-color: #ffffff; width: 348.472px;" scope="row">%Input_GPM%</td>
+</tr>
+<tr>
+<td style="background-color: #ffffff; width: 125.931px;" scope="row">User story</td>
+<td style="background-color: #ffffff; width: 348.472px;" scope="row">%Input_US%</td>
 </tr>
 </tbody>
 </table>
