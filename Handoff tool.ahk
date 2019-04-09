@@ -6,7 +6,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetBatchLines, -1 ;AHK run faster
 
 
-Input_L10n := "Assign to Linguist/LM (for approvals), then to dl-pp-triage-dt-g11n-l10n-production."
+Input_L10n := "dl-pp-triage-dt-g11n-l10n-production"
 Input_Labels := "AlphaCRC, LQA, "
 Input_AffectVersion := "Unknown – Not Yet Live|Unknown – On Live|N/A"
 Input_Project := "eCAT Content/Production Issues|Localization (LOCALZN)|PP - BL-Credit|PP - BL-Global Operations|PP - BL-Risk|PP - PL-Consumer|PP - PL-Merchant|PP - PL-Payments & Platform"
@@ -48,6 +48,7 @@ Gui Add, Text, yp+25 w95 h25 +0x200 Right, Demo taker
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Time tracker
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Slack channel
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Slack URL
+Gui Add, Text, yp+25 w95 h25 +0x200 Right, Bug tracker
 Gui Add, Text, yp+25 w95 h25 +0x200 Right, Task notes
 
 ; Right column
@@ -74,6 +75,7 @@ Gui Add, Edit, vInput_DemoTaker yp+25 w450 h21, %Input_DemoTaker%
 Gui Add, Edit, vInput_TimeTracker yp+25 w450 h21, %Input_TimeTracker%
 Gui Add, Edit, vInput_SlackChan yp+25 w450 h21, %Input_SlackChan%
 Gui Add, Edit, vInput_SlackURL yp+25 w450 h21, %Input_SlackURL%
+Gui Add, Edit, vInput_Bugtracker yp+25 w450 h21, %Input_Bugtracker%
 Gui Add, Edit, vInput_Tasknotes yp+25 w450 h21, %Input_Tasknotes%
 
 ;Buttons
@@ -114,6 +116,7 @@ ButtonCreate:
 	GuiControlGet, Input_SlackChan
 	GuiControlGet, Input_SlackURL
 	GuicontrolGet, Input_Tasknotes
+	GuiControlGet, Input_Bugtracker
 	Gosub CreateMail
 	Return
 
@@ -459,6 +462,18 @@ Else
 
 	Email_Assignee = %Email_Assignee_L10n%%Email_Assignee_NonL10n%
 
+If Input_Bugtracker !=
+{
+Email_Bugtracker = - Bug tracker link: <a href="%Input_Bugtracker%">%Input_Bugtracker%</a>
+<br>
+}
+
+If Input_SlackChan !=
+{
+Email_Slack = - Slack channel:&#32<a href="%Input_SlackURL%">%Input_SlackChan%</a>
+<br>
+}
+
 Email_Subject = %Input_Subject%
 Email_Sender = %Input_Sender%
 Email_To = %Input_To%
@@ -470,6 +485,8 @@ Hello,
 Here is the handoff for task &#34%Input_Subject%&#34.
 <br>
 <br>
+<b>General guidelines:</b>
+<br>
 -  Issues filed while testing with automation support need to include label <span style="background:yellow;mso-highlight:yellow">
 Automation</span>
 <br>
@@ -477,21 +494,20 @@ Automation</span>
 LQA_i18n</span>
 <br>
 - Issues filed outside of testing scope need to include label <span style="background:yellow;mso-highlight:yellow">
-adhocbug</span>
+adhocbug</span> and <span style="background:yellow;mso-highlight:yellow">
+Legacy</span>
 <br>
-- Slack channel:&#32<a href="%Input_SlackURL%">%Input_SlackChan%</a>
-<br>
+%Email_Slack%
 - <a href="https://engineering.paypalcorp.com/confluence/pages/viewpage.action?pageId=68070263">PayPal bug logging guidelines</a>
 <br>
 - If you cannot complete task before internal due date, let me know ASAP
 <br>
 - Remember to update status of task and cases on daily dashboard/automation/testrail (if manual)
 <br>
+%Email_Bugtracker%
 <br>
 <b>Task specific notes:</b><br>
 %Input_Tasknotes%
-<br>
-<br>
 <br>
 <table style="width: 600px; border-color: #000000; background-color: #000000;" cellspacing="2" cellpadding="2">
 <tbody>
